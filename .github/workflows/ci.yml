@@ -37,8 +37,12 @@ jobs:
           java-version: '17'
       - name: 安装 build-tools 与 platform
         run: |
-          yes | sdkmanager --licenses > /dev/null 2>&1 || true
-          sdkmanager "build-tools;34.0.0" "platforms;android-34"
+          SDKM=$(ls "$ANDROID_SDK_ROOT"/cmdline-tools/*/bin/sdkmanager 2>/dev/null | head -1)
+          echo "sdkmanager=$SDKM"
+          yes | "$SDKM" --licenses > /dev/null 2>&1 || true
+          "$SDKM" "build-tools;34.0.0" "platforms;android-34" || true
+          ls "$ANDROID_SDK_ROOT/build-tools" || true
+          ls "$ANDROID_SDK_ROOT/platforms" || true
       - name: 构建 APK
         run: bash XiyouAnswerHelperAndroid/build.sh
       - name: 校验 APK
