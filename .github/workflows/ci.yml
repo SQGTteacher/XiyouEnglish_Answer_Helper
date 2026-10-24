@@ -27,17 +27,24 @@ jobs:
   android-build:
     name: 构建 Android APK
     runs-on: ubuntu-latest
+    env:
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
       - name: 安装 build-tools 与 platform
-        run: sdkmanager "build-tools;34.0.0" "platforms;android-34"
+        run: |
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          sdkmanager "build-tools;34.0.0" "platforms;android-34"
       - name: 构建 APK
         run: bash XiyouAnswerHelperAndroid/build.sh
+      - name: 校验 APK
+        run: |
+          ls -l XiyouAnswerHelperAndroid/XiyouAnswerHelper.apk
+          "$ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner" verify XiyouAnswerHelperAndroid/XiyouAnswerHelper.apk
       - name: 上传 APK
         uses: actions/upload-artifact@v4
         with:
