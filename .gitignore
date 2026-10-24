@@ -1,0 +1,31 @@
+# 构建产物与工具链
+.toolchain/
+.ref/
+docs/
+**/build/
+XiyouAnswerHelperAndroid/XiyouAnswerHelper.apk
+XiyouAnswerHelperAndroid/keystore/
+XiyouAnswerHelperDesktop/resources/app.asar
+XiyouAnswerHelperDesktop/resources/app.asar.orig
+XiyouAnswerHelperDesktop/resources/app.asar.unused
+
+# Electron 运行时（体积大，不入库；只提交 resources/app 源码）
+XiyouAnswerHelperDesktop/*.exe
+XiyouAnswerHelperDesktop/*.dll
+XiyouAnswerHelperDesktop/*.pak
+XiyouAnswerHelperDesktop/*.bin
+XiyouAnswerHelperDesktop/*.dat
+XiyouAnswerHelperDesktop/locales/
+XiyouAnswerHelperDesktop/swiftshader/
+XiyouAnswerHelperDesktop/resources/default_app.asar
+XiyouAnswerHelperDesktop/resources/elevate.exe
+XiyouAnswerHelperDesktop/Uninstall*.exe
+
+# 本机数据 / 日志
+*.log
+papers.json
+account.json
+
+# 系统
+Thumbs.db
+.DS_Store

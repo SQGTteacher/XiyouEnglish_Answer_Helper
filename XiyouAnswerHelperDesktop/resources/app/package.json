@@ -1,0 +1,10 @@
+{
+  "name": "xiyou-answer-helper",
+  "productName": "XiyouAnswerHelper",
+  "version": "1.0.0",
+  "description": "Monitor the Xiyou English client's Chromium storage and show homework answers in an always-on-top window.",
+  "main": "main.js",
+  "author": "local",
+  "license": "MIT",
+  "dependencies": {}
+}
