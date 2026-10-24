@@ -1,0 +1,32 @@
+﻿# 鏋勫缓浜х墿涓庡伐鍏烽摼
+.toolchain/
+.ref/
+docs/
+**/build/
+XiyouAnswerHelperAndroid/XiyouAnswerHelper.apk
+XiyouAnswerHelperAndroid/keystore/
+XiyouAnswerHelperDesktop/resources/app.asar
+XiyouAnswerHelperDesktop/resources/app.asar.orig
+XiyouAnswerHelperDesktop/resources/app.asar.unused
+
+# Electron 杩愯鏃讹紙浣撶Н澶э紝涓嶅叆搴擄紱鍙彁浜?resources/app 婧愮爜锛?XiyouAnswerHelperDesktop/*.exe
+XiyouAnswerHelperDesktop/*.dll
+XiyouAnswerHelperDesktop/*.pak
+XiyouAnswerHelperDesktop/*.bin
+XiyouAnswerHelperDesktop/*.dat
+XiyouAnswerHelperDesktop/*.json
+XiyouAnswerHelperDesktop/locales/
+XiyouAnswerHelperDesktop/swiftshader/
+XiyouAnswerHelperDesktop/resources/default_app.asar
+XiyouAnswerHelperDesktop/resources/elevate.exe
+XiyouAnswerHelperDesktop/Uninstall*.exe
+
+# 鏈満鏁版嵁 / 鏃ュ織
+*.log
+papers.json
+account.json
+
+# 绯荤粺
+Thumbs.db
+.DS_Store
+
