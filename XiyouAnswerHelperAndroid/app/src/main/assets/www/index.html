@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#FFF8F3">
+<title>西柚答案助手</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ================= 登录 ================= -->
+  <section id="view-login" class="view">
+    <div class="hero">
+      <div class="logo"><span>西柚</span></div>
+      <h1>答案助手</h1>
+      <p class="hero-sub">登录后自动获取本次试题答案</p>
+    </div>
+
+    <div class="card form">
+      <label for="account">账号 / 手机号</label>
+      <input id="account" type="text" inputmode="text" autocomplete="username"
+             placeholder="请输入西柚英语账号" autocapitalize="off" spellcheck="false">
+
+      <label for="password">密码</label>
+      <div class="pwd-wrap">
+        <input id="password" type="password" autocomplete="current-password" placeholder="请输入密码">
+        <button id="togglePwd" type="button" class="eye">显示</button>
+      </div>
+
+      <label class="switch-row">
+        <span>记住账号密码</span>
+        <input id="remember" type="checkbox" class="switch" checked>
+      </label>
+
+      <button id="btnLogin" class="btn primary" type="button">登 录</button>
+      <div id="loginMsg" class="msg"></div>
+    </div>
+
+    <p class="foot">账号密码仅保存在本机，用于模拟电脑端登录取答案</p>
+  </section>
+
+  <!-- ================= 作业列表 ================= -->
+  <section id="view-home" class="view hidden">
+    <header class="topbar">
+      <div class="who">
+        <div class="hello" id="hello">你好</div>
+        <div class="sub" id="subline">正在加载作业…</div>
+      </div>
+      <button id="btnLogout" class="btn ghost small" type="button">退出</button>
+    </header>
+
+    <div class="toolbar">
+      <button id="btnListBack" class="btn ghost small hidden" type="button">← 返回</button>
+      <button id="btnRefresh" class="btn ghost small" type="button">刷新</button>
+      <button id="btnManual" class="btn ghost small" type="button">手动输入 ID</button>
+    </div>
+
+    <div id="manualBox" class="card hidden">
+      <label for="manualId">试卷 groupId</label>
+      <div class="inline">
+        <input id="manualId" type="text" inputmode="numeric" placeholder="例如 1234567890">
+        <button id="btnManualGo" class="btn primary small" type="button">取答案</button>
+      </div>
+    </div>
+
+    <div id="homeMsg" class="msg"></div>
+    <div id="homeworkList" class="list"></div>
+    <div id="emptyTip" class="empty hidden">
+      <div class="empty-icon">📚</div>
+      <div>没有找到作业</div>
+      <div class="empty-sub">请确认该账号今天有需要完成的作业，或点「刷新」重试</div>
+    </div>
+  </section>
+
+  <!-- ================= 答案 ================= -->
+  <section id="view-answer" class="view hidden">
+    <header class="topbar sticky">
+      <button id="btnBack" class="btn ghost small" type="button">返回</button>
+      <div class="answer-title" id="answerTitle">答案</div>
+      <button id="btnCopy" class="btn ghost small" type="button">复制</button>
+    </header>
+
+    <div class="detail-bar">
+      <span>显示完整详细答案 / 踩分点</span>
+      <input id="detailSwitch" type="checkbox" class="switch">
+    </div>
+
+    <div id="answerBody" class="answer"></div>
+  </section>
+
+  <!-- ================= 作答 ================= -->
+  <section id="view-session" class="view hidden">
+    <header class="topbar sticky">
+      <button id="btnSessionExit" class="btn ghost small" type="button">退出</button>
+      <div class="answer-title" id="sessionTitle">作答</div>
+      <button id="btnSessionDone" class="btn ghost small" type="button">完成</button>
+    </header>
+
+    <div class="session-screen">
+      <span>录音时显示答案</span>
+      <input id="answerSwitch" type="checkbox" class="switch" />
+    </div>
+
+    <div class="session-progress"><div id="sessionBar"></div></div>
+    <div class="session-meta" id="sessionMeta">第 1 / 1 步</div>
+
+    <div class="sec session-card">
+      <div class="session-kind" id="sessionKind">播放题干</div>
+      <div class="media-box hidden" id="mediaBox">
+        <video id="videoEl" playsinline webkit-playsinline></video>
+      </div>
+      <div class="session-text" id="sessionText"></div>
+      <div class="media-info hidden" id="mediaInfo"></div>
+      <div class="session-action" id="sessionAction"></div>
+      <div class="session-timer hidden" id="sessionTimer">00:00</div>
+      <div class="answer-box hidden" id="answerBox"></div>
+    </div>
+
+    <div class="session-nav">
+      <button id="btnPrevStep" class="btn ghost" type="button">上一步</button>
+      <button id="btnNextStep" class="btn primary" type="button">下一步</button>
+    </div>
+  </section>
+
+</div>
+
+<audio id="audioEl" preload="auto"></audio>
+
+<div id="loading" class="loading hidden">
+  <div class="spinner"></div>
+  <div id="loadingText">请稍候…</div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script src="paper-parser.js"></script>
+<script src="answer-format.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

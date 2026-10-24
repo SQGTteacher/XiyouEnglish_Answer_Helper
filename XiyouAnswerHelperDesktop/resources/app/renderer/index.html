@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+    <title>西柚答案助手</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="titlebar">
+      <div class="brand">
+        <span class="logo">柚</span>
+        <span class="name">西柚答案助手</span>
+        <span id="liveDot" class="dot" title="实时通道"></span>
+      </div>
+      <div class="tb-btns">
+        <button id="btnRefresh" title="重新扫描">⟳</button>
+        <button id="btnTop" class="on" title="窗口置顶">⇧</button>
+        <button id="btnMin" title="最小化">–</button>
+        <button id="btnClose" title="关闭">✕</button>
+      </div>
+    </div>
+
+    <div id="toolbar">
+      <select id="paperSelect" title="选择已捕获的试题"></select>
+      <button id="btnAccount" title="账号登录，直接在线获取答案">账号</button>
+      <button id="btnCopyAll" title="复制当前试题的全部答案">复制全部</button>
+      <label id="detailWrap" title="显示题干、全部答案、关键词、踩分点、原文">
+        <input type="checkbox" id="detailChk" />
+        <span>详细</span>
+      </label>
+      <button id="btnFontDown" title="缩小字号">A-</button>
+      <button id="btnFontUp" title="放大字号">A+</button>
+      <input id="opacity" type="range" min="40" max="100" value="100" title="窗口透明度" />
+    </div>
+
+    <div id="statusbar">
+      <span id="status">正在启动…</span>
+      <button id="btnLaunch" class="mini">启动客户端</button>
+      <button id="btnDir" class="mini">打开目录</button>
+      <button id="btnPass" class="mini" title="鼠标穿透（Ctrl+Alt+X 切换），穿透后可点击下面的客户端">穿透</button>
+    </div>
+
+    <div id="content"></div>
+
+    <div id="modalMask" class="modal-mask hidden">
+      <div id="loginModal" class="modal">
+        <div class="modal-head">
+          <span>账号登录</span>
+          <button id="loginClose" class="modal-x">✕</button>
+        </div>
+        <div class="modal-body">
+          <label class="field-label">账号 / 手机号</label>
+          <input id="accInput" class="field" type="text" placeholder="请输入西柚账号" autocomplete="username" spellcheck="false" />
+          <label class="field-label">密码</label>
+          <input id="pwdInput" class="field" type="password" placeholder="请输入密码" autocomplete="current-password" />
+          <label class="check-line"><input id="rememberChk" type="checkbox" checked /> 记住账号密码</label>
+          <div id="loginMsg" class="modal-msg"></div>
+          <button id="loginGo" class="modal-primary">登录</button>
+        </div>
+      </div>
+
+      <div id="hwModal" class="modal hidden">
+        <div class="modal-head">
+          <span id="hwTitle">选择作业</span>
+          <button id="hwClose" class="modal-x">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="hw-tools">
+            <button id="hwBack" class="mini hidden">← 返回</button>
+            <button id="hwRefresh" class="mini">刷新</button>
+            <button id="hwLogout" class="mini">退出登录</button>
+          </div>
+          <div id="hwList" class="hw-list"></div>
+          <div id="hwMsg" class="modal-msg"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast"></div>
+    <script src="answer-format.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  js-check:
+    name: JS 语法检查
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: node --check
+        run: |
+          set -e
+          files=$(find . -name '*.js' -not -path './.git/*')
+          for f in $files; do
+            echo "check $f"
+            node --check "$f"
+          done
+          echo "所有 JS 语法通过"
+
+  android-build:
+    name: 构建 Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: 安装 build-tools 与 platform
+        run: sdkmanager "build-tools;34.0.0" "platforms;android-34"
+      - name: 构建 APK
+        run: bash XiyouAnswerHelperAndroid/build.sh
+      - name: 上传 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: XiyouAnswerHelper-apk
+          path: XiyouAnswerHelperAndroid/XiyouAnswerHelper.apk
+          if-no-files-found: error

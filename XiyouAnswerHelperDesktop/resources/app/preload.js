@@ -1,0 +1,28 @@
+const { contextBridge, ipcRenderer } = require('electron');
+
+contextBridge.exposeInMainWorld('helper', {
+  getState: () => ipcRenderer.invoke('get-state'),
+  selectPaper: (id) => ipcRenderer.invoke('select-paper', id),
+  copy: (t) => ipcRenderer.invoke('copy', t),
+  toggleTop: () => ipcRenderer.invoke('toggle-top'),
+  togglePass: () => ipcRenderer.invoke('toggle-pass'),
+  setPass: (v) => ipcRenderer.invoke('set-pass', v),
+  passHover: (interactive) => ipcRenderer.send('pass-hover', interactive),
+  setOpacity: (v) => ipcRenderer.invoke('set-opacity', v),
+  setFont: (v) => ipcRenderer.invoke('set-font', v),
+  refresh: () => ipcRenderer.invoke('refresh'),
+  launchClient: () => ipcRenderer.invoke('launch-client'),
+  openDir: (d) => ipcRenderer.invoke('open-dir', d),
+  setDataDir: (d) => ipcRenderer.invoke('set-data-dir', d),
+  clearHistory: () => ipcRenderer.invoke('clear-history'),
+  min: () => ipcRenderer.send('win-min'),
+  hide: () => ipcRenderer.send('win-hide'),
+  close: () => ipcRenderer.send('win-close'),
+  onState: (cb) => ipcRenderer.on('state', (_e, s) => cb(s)),
+  apiAccount: () => ipcRenderer.invoke('api-account'),
+  apiLogin: (p) => ipcRenderer.invoke('api-login', p),
+  apiLogout: () => ipcRenderer.invoke('api-logout'),
+  apiHomeworks: () => ipcRenderer.invoke('api-homeworks'),
+  apiBagItems: (id) => ipcRenderer.invoke('api-bag-items', id),
+  apiPaper: (id) => ipcRenderer.invoke('api-paper', id),
+});
